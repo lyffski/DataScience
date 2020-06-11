@@ -5,7 +5,7 @@
     <a href="https://www.youtube.com/channel/UCFrjdcImgcQVyFbK04MBEhA">Brandon Foltz</a>
   </ol>
   <ol>
-    <a hre="https://www.youtube.com/channel/UCfzlCWGWYyIQ0aLC5w48gBQ">sentdex</a>
+    <a href="https://www.youtube.com/channel/UCfzlCWGWYyIQ0aLC5w48gBQ">sentdex</a>
   </ol>
 </ul>
 
