@@ -1,0 +1,182 @@
+R = caseSensitive
+
+Quantitative_Numeric_Measurement= variables
+    if you can add it, it is quantitative
+Categorical= variables
+    if you can not add something
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+@DATA_TYPES
+    numeric(int, single or double)
+    char
+    logical
+    complex
+    raw
+
+@DATA_STRUCTURE 
+VECTOR=
+    • 1+ numbers in a 1dim array
+    • all same date types    
+    • R s basic data object
+    E.G.
+        vec <- c(TRUE, TRUE, FALSE, FALSE, TRUE)
+
+MATRIX_ARRAY= 
+    • 2 dim // only array can have more then 2 dim
+    • same length
+    • same data class
+    • columns not named refereed to by index
+    E.G.
+        matrix1 <- matrix(c(T, T, F, F; T, F), nrow = 2)
+                [,1]    [,2]    [,3]
+            [1,]TRUE    FALSE   TRUE   
+            [2,]TRUE    FALSE   FALSE
+    Array give data, then dimensions (rows, columns, tables)
+    Array:= arr <- array(c( 1:24), c(4, 3, 2))
+            ,,1 //first table
+                [,1]    [,2]    [,3]
+            [1,] 1      5        9
+            [2,] 2      6        10
+            [3,] 3      7        11
+            [4,] 4      8        12
+            
+            ,,2 //second table
+                [,1]    [,2]    [,3]
+            [1,] 13     17      21
+            [2,] 14     18      22
+            [3,] 15     19      23
+            [4,] 16     20      24
+
+DATE_FRAME= //Can combine vectors of the same length
+    • Can have vectors of multiple types
+    • all same length
+    • similar to spreadsheet
+    • Special functions
+    • usually date structure
+    E.G.
+        vNumeric    <- c(1, 2, 3)
+        vCharacter  <- c("a", "b", "c")
+        vLogical    <- c(T, F, T)
+        dfa <- cbind(vNumeric, vCharacter, vLogical) //matrix of one date type
+        df  <- as. data.frame(cbind(vNumeric, vCharacter, vLogical)) // Makes a data frame with three different data types
+
+LIST=
+    • most flexible
+    • order collections of elements
+    • any class, length or structures
+    • can include lists
+    • hard to work
+    E.G.
+        o1 <- c(1, 2, 3)
+        o2 <- c("a", "b", "c", "d")
+        o3 <- c(T, F, T, T, F)
+        list1 <- list (o1, o2, o3)
+            [[1]]
+                [1] 1 2 3
+            [[2]]
+                [1] "a" "b" "c" "d"
+            [[3]]
+                [1] TRUE FALSE TRUE TRUE FALSE
+//int save as double
+
+Coercions= is good (=that is, changing a data object form one type to another)
+    (coerce <- as.data.frame(matrix(1:9, nrow = 3))) //is.data.FRAME(coerce) → to get bool
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@ggplot
+SYTAX=
+    ggplot({globalEnvironment[1:243]}, aes(x={column}, fill = {survived})) +
+        geom_histogram(binwidth = 5) +
+        face_wrap(~{var1}+ {var2})+
+        ggtitel("{var1}, {var2")
+        xlab()
+        ylab()
+        ylim(0,50) +
+        labs(fill = "{survived}")
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@MODELS
+SYTAX= 
+    rf.train.1 <- data.combined[1:891, c("pclass","title")]
+    rf.label <- as.factor(train$survied)
+
+    set.seed(1234) //important to work on same seed when you work on the same data set
+    rf.1 <- randomForest(x = rf.train.1, y = rf.label, importance = TRUE, ntree = 1000)
+    rf.1 //numbers
+        OOB = OutOfBag // estimate of error rate: {20.47%}
+        Confusion_matirx=:
+            0   1   class.error
+        0   538 11  0.02003643  //it predicted that 538 been died but it has considered 11 as those who survied
+        1   174 168 0.50877193  //it predicted that 174 been saved but is has considered 168 at those who died
+        table(train$survied) → 0 = 549 1 = 342
+    varImpPlot(rf.1) //display which variables is more important at predicting by model && try to concatenate varriables into one
+
+Models using caret= //Book::Applied Predivitve modeling
+• Parametric model: GML (stepwwise/glmnet)
+• Diagnostics: residual plts (e.g. added-variabl; component + residual...)
+• Non-parametric models: ensemble of decision trees
+    random_subspace
+Pre-process=(dataSet, methode = c(var1, var2)) transformatins (vertering, scaling etc.) can be estimated from the training data and applied to any data set with the same varibales → normalizate data
+    · you have to call the Pre-process func to train a model to execute what you want done
+    cor(data.set$var1, date.set$var2)   //output: -1<x<1 then: -1<x<0 is perfectly negativlily correlated || 0<x<1 is postivily correrlated, OR x==0 not correlated //the nearest value to -1 or 1 higly correlated, nearest 0 lowly correlated
+
+STEPS_IN_BUILDING_A_PREDICTION=
+1. Find the right data
+    • more_accurate_data > better_models
+    • Know the bench mark //the minimal score to reach
+    • Probability_of_perfect_classification = (0.5^test set sample size) in approx.
+2. Define your error rate
+    ○ Defining true/false positives:
+        • truePositive is when Sick people correctly diagnosed as Sick
+        • falsePositive is when Healthy people incorrectly identified as Sick
+        • trueNegative is when healthy people correctly identified as healthy
+        • falseNegative is when Sick people correctly identified as healthy
+            Graph <ulr=https://en.wikipedia.org/wiki/Sensitivity_and_specificity>
+    ○ Common error measures:
+        • Mean squared error (or root mean squared error)
+            Continuoues data, sensitive to outliers
+        • Median absolute deviation
+            ontinuous data, often more robost
+        • Sensitvity (recall)
+            if you want few missed postives
+        • Specificity 
+            If you want few negatives called positives
+        • Accuracy
+            Weights false postives/negtives equally
+        • Concordance
+            One example is kappa?
+3.Split data into:
+    training
+    Testing
+    Validation (not overfitting)
+4. On the training set pick features
+5. On the training set pick predictions function
+6. On the training set cross-validation
+    Cross-Validations=
+    ○ Approach:
+        1. Use the training set 
+        2. Split it tinto training and test sets
+        3. Build model on the training set 
+        4. Evaluate on the test set
+        5. Repeat and average the estimeted errors
+    ○ Used for:
+        1. Picking variables io include in a model
+        2. Picking the type of predictions functions to use 
+        3. Picking the parameters in the predictins function
+        4. Comparing different predictors
+    ○ Ways of Approach: 
+        • RandomSubsampling
+        • K-fold (Recommended)
+        • Leave one out
+7. If no validations - apply to test set
+8. If validation - apply to test set and refine
+9. If validation - apply 1x to validation
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    
+

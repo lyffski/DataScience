@@ -1,0 +1,60 @@
+import pandas as pd
+import quandl, math
+import numpy as np
+from sklearn import preprocessing, cross_validation, mvs
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+from matplotlib import style
+import pickle
+
+style.use('ggplot')
+df = quandl.get["WIKI/GOOGL"]
+df = df[['adj_open','adj_high','adj_low','adj_close','adj_volume']]
+df['HL_PCT'] = (df['adj_high'] - df['adj_close']) / df['adj_close']
+df['PTC_change'] = (df['adj_close'] - df['adj_open']) / df['adj_open']
+df = df[['adj_close','HL_PTC','PCT_change','adj_volume']]
+
+forecast_col = 'adj_close'
+df.fillna(-9999, inplace=True)
+forecast_out = int(math.ceil(0.01*len(df)))
+df['label'] = df[forecast_col].shift(-forecase_out)
+
+x = np.array(df.drop(['label'],1))
+x = preprocessing.scale(X)
+x_lately = x[-forecast_out:]
+x = x[:-forecast_out:]
+
+df.dropan(inplace=True)
+y = np.array(df['label'])
+
+x_train, x_train, y_train, y_train = cross_validation.train-test_split(x, y, test_size=0.2)
+
+clf = LinearRegression(n_jobs=-1)
+clf.fit(x_train, y_train)
+with open('linearregression.pickle','wb')
+    pickle.dump(clf, f)
+    
+pickel_in = open('linearregession','rb')
+clf = pickle.load(pickle_in)
+
+accuracy = clf. score(x_test, y_test)
+forecase_set = clf.predict(x_lately)
+
+df['forecast'] = np.nan
+
+last_date = df.iloc[-1].name
+last_unix = last_data.timestamp()
+one_day = 86400
+next_unix = last_unix + one_day
+
+for i in forecase_set:
+    next_date = datetime.datetime.fromtimestamp(next_unix)
+    next_unix += one_day
+    df.loc[next_date] = [np.nan for _ in range(len(df.colums)-1)] + [i]
+
+df['adj_close'].plot()
+df['forecase'].plot()
+plt.legend(loc=4)
+plt.xlabel('Data')
+plt.ylabel('Price')
+plt.show()
