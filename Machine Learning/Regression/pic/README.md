@@ -1,12 +1,12 @@
 <h1>Sources<h1>
 
 <ol>
-    <li>
+    <lu>
         <a href="https://www.youtube.com/channel/UCFrjdcImgcQVyFbK04MBEhA">Brandon Foltz</a>
-    </li>
-    <li>
+    </lu>
+    <lu>
         <a href="https://www.youtube.com/channel/UCfzlCWGWYyIQ0aLC5w48gBQ">sentdex</a>
-    </li>
+    </lu>
 </ol>
 
 
