@@ -12,9 +12,9 @@ def create_dataset(qty, variance, step=2, correlation=False):
     for i in range (qty):
         y = var + random.randrange(-variance, variance)
         yes.append(y)
-        if correlation and correlation == "pos"
+        if correlation and correlation == True
             var += step
-        elif correlation and correlation ==  "neg"
+        elif correlation and correlation ==  False
             var -= step
     xs = [i for i in range(len(ys))]
     return np.array(xs, dtype=np.float64), np.array(ys, dtype=np.float64)
@@ -43,3 +43,5 @@ regr_line = [(m*x)+t for x in xs]
 r_squared = coefficient_of_det(ys, regr_line)
 
 print("Confidence PTC: "+str(r_squared))
+
+
