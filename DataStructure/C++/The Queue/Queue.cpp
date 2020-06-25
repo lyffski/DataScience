@@ -118,7 +118,7 @@ int main()
 
         cout<<"head="<<head<<"   tail="<<tail<<"   amount="<<amount<<endl<<endl;
 
-        cout << "MENU GLOWNE KOLEJKI:"<<endl;
+        cout << "Main Menu:"<<endl;
         cout << "=========================================="<<endl;
         cout << "1. PUSH (add element) "<<endl;
         cout << "2. POP (delete element) "<<endl;
