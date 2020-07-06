@@ -1,7 +1,8 @@
 # DataScience
 Data science is an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from many structural and unstructured data. Data science is related to data mining, deep learning and big data.
 
-<h2>Resources/Reference</h2
+<h2>Resources/Reference</h2>
+
 <a href="https://www.wikipedia.org">Wiki</a><br>
 
 <a href="https://www.youtube.com/channel/UCCezIgC97PvUuR4_gbFUs5g">Corey Schfner</a><br>
