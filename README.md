@@ -1,6 +1,6 @@
 # DataScience
 Data science is an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from many structural and unstructured data. Data science is related to data mining, deep learning and big data.
-### __IMPORTAN__ the github page somehow do not always read the Latex properly so consider if you will to just clone the repo. the get all the formel.
+### __IMPORTAN__ the github page somehow do not always read the Latex sytax properly so consider, if you will to just clone the repo. the get all the formel.
 <br>
 <h2>Resources/Reference</h2>
 
